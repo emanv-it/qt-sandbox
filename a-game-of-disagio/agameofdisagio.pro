@@ -6,14 +6,14 @@ CONFIG += c++11
 
 SOURCES += \
     src/main.cpp \
-    src/schemahandler.cpp \
+    src/handlers/schemahandler.cpp \
     src/ui/button.cpp \
     src/ui/centrallayout.cpp \
     src/ui/mainwindow.cpp
 
 HEADERS += \
     src/exceptions.h \
-    src/schemahandler.h \
+    src/handlers/schemahandler.h \
     src/ui/button.h \
     src/ui/centrallayout.h \
     src/ui/mainwindow.h
