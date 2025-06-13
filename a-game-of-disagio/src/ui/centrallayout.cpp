@@ -23,7 +23,3 @@ void CentralLayout::addButtons(QGridLayout* layout)
         }
     }
 }
-
-CentralLayout::~CentralLayout()
-{
-}

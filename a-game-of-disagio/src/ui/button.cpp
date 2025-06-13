@@ -13,7 +13,3 @@ QPushButton* Button::getButton()
     button->show();
     return button;
 }
-
-Button::~Button()
-{
-}

@@ -11,7 +11,6 @@ class Button
 {
 public:
     Button(int size);
-    ~Button();
 
     QPushButton* getButton();
 

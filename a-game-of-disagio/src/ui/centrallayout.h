@@ -12,7 +12,6 @@ class CentralLayout
 {
 public:
     CentralLayout(int size, int count);
-    ~CentralLayout();
 
     QGridLayout* getLayout();
 
