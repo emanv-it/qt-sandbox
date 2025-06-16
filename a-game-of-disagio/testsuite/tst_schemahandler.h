@@ -13,4 +13,6 @@ private:
 private slots:
 
     void getEmptySchema();
+
+    void getDotSchema();
 };
