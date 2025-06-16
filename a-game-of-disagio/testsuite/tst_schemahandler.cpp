@@ -1,5 +1,5 @@
 #include "tst_schemahandler.h"
-#include "../src/schemahandler.h"
+#include "../src/handlers/schemahandler.h"
 #include "../src/exceptions.h"
 
 TestSchemaHandler::TestSchemaHandler() {}

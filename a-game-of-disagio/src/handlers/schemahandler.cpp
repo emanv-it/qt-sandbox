@@ -1,5 +1,5 @@
 #include "schemahandler.h"
-#include "exceptions.h"
+#include "../exceptions.h"
 
 SchemaHandler::SchemaHandler(int size) {
     this->size = size;
