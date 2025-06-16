@@ -34,6 +34,17 @@ void TestSchemaHandler::isEmptyOrIsFullWithSize10() {
     }
     QVERIFY(!handler->isEmpty());
     QVERIFY(handler->isFull());
+    for (int row = 0; row < 10; row++) {
+        for (int col = 0; col < 10; col++) {
+            handler->setEmpty(row, col);
+            if (row != 9 && col != 9) {
+                QVERIFY(!handler->isEmpty());
+                QVERIFY(!handler->isFull());
+            }
+        }
+    }
+    QVERIFY(handler->isEmpty());
+    QVERIFY(!handler->isFull());
 }
 
 void TestSchemaHandler::setFullWithException() {
