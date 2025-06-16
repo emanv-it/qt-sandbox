@@ -16,7 +16,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(TestSchemaHandler tst_schemahandler.h tst_schemahandler.cpp
     ../src/handlers/schemahandler.cpp ../src/handlers/schemahandler.h
-    ../src/exceptions.h
 )
 add_test(NAME schemahandler COMMAND schemahandler)
 

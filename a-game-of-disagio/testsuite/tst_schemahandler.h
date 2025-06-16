@@ -1,18 +1,16 @@
 #include <QtTest>
+#include "../src/handlers/schemahandler.h"
 
-class TestSchemaHandler : public QObject
-{
-    Q_OBJECT
+class TestSchemaHandler : public QObject {
+Q_OBJECT
 
 public:
     TestSchemaHandler();
 
+private:
+    SchemaHandler *handler;
+
 private slots:
-    void isEmptyAndIsFullWithSize0();
 
-    void isEmptyOrIsFullWithSize1();
-
-    void isEmptyOrIsFullWithSize10();
-
-    void setFullWithException();
+    void getEmptySchema();
 };

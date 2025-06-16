@@ -3,28 +3,12 @@
 
 #include <vector>
 
-class SchemaHandler
-{
+class SchemaHandler {
 
 public:
-    SchemaHandler(int size);
+    SchemaHandler();
 
-    bool isEmpty();
-
-    bool isFull();
-
-    void setEmpty(int row, int col);
-
-    void setFull(int row, int col);
-
-private:
-    int size;
-
-    std::vector<std::vector<bool>> schema;
-
-    void initSchema();
-
-    void set(int row, int col, bool value);
+    std::vector<std::vector<bool>> fromPattern();
 };
 
 #endif // SCHEMAHANDLER_H
