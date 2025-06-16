@@ -26,4 +26,15 @@ void TestSchemaHandler::getDotSchema() {
     );
 }
 
+void TestSchemaHandler::getUpperCaseDSchema() {
+    std::vector<std::vector<bool>> expected = {{true, true,  true,  false, false},
+                                               {true, false, false, true,  false},
+                                               {true, false, false, false, true},
+                                               {true, false, false, false, true},
+                                               {true, true,  true,  true,  false}};
+    QVERIFY(
+            handler->fromPattern('D') == expected
+    );
+}
+
 QTEST_APPLESS_MAIN(TestSchemaHandler)
