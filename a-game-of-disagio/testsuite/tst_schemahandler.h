@@ -17,4 +17,6 @@ private slots:
     void getDotSchema();
 
     void getUpperCaseDSchema();
+
+    void getLowerCaseISchema();
 };

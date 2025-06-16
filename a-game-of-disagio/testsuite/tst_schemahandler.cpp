@@ -37,4 +37,15 @@ void TestSchemaHandler::getUpperCaseDSchema() {
     );
 }
 
+void TestSchemaHandler::getLowerCaseISchema() {
+    std::vector<std::vector<bool>> expected = {{false, false, true,  false, false},
+                                               {false, false, false, false, false},
+                                               {false, true,  true,  false, false},
+                                               {false, false, true,  false, false},
+                                               {false, true,  true,  true,  false}};
+    QVERIFY(
+            handler->fromPattern('i') == expected
+    );
+}
+
 QTEST_APPLESS_MAIN(TestSchemaHandler)
