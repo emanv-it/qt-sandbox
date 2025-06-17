@@ -21,4 +21,6 @@ private slots:
     void getLowerCaseISchema();
 
     void getDoubleDotSchema();
+
+    void getDoubleDSchema();
 };
