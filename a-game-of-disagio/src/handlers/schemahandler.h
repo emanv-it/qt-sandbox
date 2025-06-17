@@ -7,14 +7,22 @@
 class SchemaHandler {
 
 public:
-    SchemaHandler();
+    SchemaHandler(int size);
 
     std::vector<std::vector<bool>> fromPattern();
 
     std::vector<std::vector<bool>> fromPattern(char pattern);
 
 private:
+    int size;
+
     std::map<char, std::vector<std::vector<bool>>> map;
+
+    void initMap();
+
+    std::vector<std::vector<bool>> resize(std::vector<std::vector<bool>> schema);
+
+    int resizePosition(int position, float factor);
 };
 
 #endif // SCHEMAHANDLER_H

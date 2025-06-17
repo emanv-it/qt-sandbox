@@ -19,4 +19,6 @@ private slots:
     void getUpperCaseDSchema();
 
     void getLowerCaseISchema();
+
+    void getDoubleDotSchema();
 };

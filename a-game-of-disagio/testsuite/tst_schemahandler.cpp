@@ -1,7 +1,7 @@
 #include "tst_schemahandler.h"
 
 TestSchemaHandler::TestSchemaHandler() {
-    handler = new SchemaHandler();
+    handler = new SchemaHandler(5);
 }
 
 void TestSchemaHandler::getEmptySchema() {
@@ -45,6 +45,23 @@ void TestSchemaHandler::getLowerCaseISchema() {
                                                {false, true,  true,  true,  false}};
     QVERIFY(
             handler->fromPattern('i') == expected
+    );
+}
+
+void TestSchemaHandler::getDoubleDotSchema() {
+    handler = new SchemaHandler(10);
+    std::vector<std::vector<bool>> expected = {{false, false, false, false, false, false, false, false, false, false},
+                                               {false, false, false, false, false, false, false, false, false, false},
+                                               {false, false, false, false, false, false, false, false, false, false},
+                                               {false, false, false, false, false, false, false, false, false, false},
+                                               {false, false, false, false, false, false, false, false, false, false},
+                                               {false, false, false, false, false, false, false, false, false, false},
+                                               {false, false, false, false, false, false, false, false, false, false},
+                                               {false, false, false, false, false, false, false, false, false, false},
+                                               {false, false, false, false, true,  true,  false, false, false, false},
+                                               {false, false, false, false, true,  true,  false, false, false, false}};
+    QVERIFY(
+            handler->fromPattern('.') == expected
     );
 }
 
