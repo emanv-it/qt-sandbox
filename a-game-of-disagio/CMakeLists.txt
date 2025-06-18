@@ -12,6 +12,8 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
 add_executable(a-game-of-disagio src/main.cpp
+        src/exceptions.h
+        src/models/schema.cpp src/models/schema.h
         src/handlers/schemahandler.cpp src/handlers/schemahandler.h
         src/ui/button.cpp src/ui/button.h
         src/ui/centrallayout.cpp src/ui/centrallayout.h

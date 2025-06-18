@@ -1,26 +1,31 @@
 #ifndef SCHEMAHANDLER_H
 #define SCHEMAHANDLER_H
 
-#include <vector>
+#include "../models/schema.h"
 #include <map>
 
 class SchemaHandler {
 
 public:
+
     SchemaHandler(int size);
 
-    std::vector<std::vector<bool>> fromPattern();
+    SchemaHandler();
 
-    std::vector<std::vector<bool>> fromPattern(char pattern);
+    Schema get();
+
+    SchemaHandler *fromPattern(char pattern);
+
+    SchemaHandler *change(int row, int col);
 
 private:
-    int size;
+    Schema current;
 
     std::map<char, std::vector<std::vector<bool>>> map;
 
     void initMap();
 
-    std::vector<std::vector<bool>> resize(std::vector<std::vector<bool>> schema);
+    void set(std::vector<std::vector<bool>> schema);
 
     int resizePosition(int position, float factor);
 };

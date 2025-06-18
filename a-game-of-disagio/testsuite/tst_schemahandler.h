@@ -23,4 +23,6 @@ private slots:
     void getDoubleDotSchema();
 
     void getDoubleDSchema();
+
+    void performClick();
 };
