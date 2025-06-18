@@ -81,3 +81,14 @@ SchemaHandler *SchemaHandler::change(int row, int col) {
     }
     return this;
 }
+
+bool SchemaHandler::isEmpty() {
+    for (std::vector<bool> entry: current.matrix) {
+        for (bool value: entry) {
+            if (value) {
+                return false;
+            }
+        }
+    }
+    return true;
+}

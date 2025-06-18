@@ -18,6 +18,8 @@ public:
 
     SchemaHandler *change(int row, int col);
 
+    bool isEmpty();
+
 private:
     Schema current;
 

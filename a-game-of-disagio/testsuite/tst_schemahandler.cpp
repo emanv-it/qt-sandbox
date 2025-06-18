@@ -133,4 +133,17 @@ void TestSchemaHandler::performClick() {
     );
 }
 
+void TestSchemaHandler::checkEmptySchema() {
+    handler = new SchemaHandler();
+    QVERIFY(
+            handler->get().size == 5
+    );
+    QVERIFY(
+            handler->isEmpty()
+    );
+    QVERIFY(
+            !handler->change(0, 0)->isEmpty()
+    );
+}
+
 QTEST_APPLESS_MAIN(TestSchemaHandler)

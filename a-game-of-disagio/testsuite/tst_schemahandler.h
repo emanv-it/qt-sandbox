@@ -25,4 +25,6 @@ private slots:
     void getDoubleDSchema();
 
     void performClick();
+
+    void checkEmptySchema();
 };
