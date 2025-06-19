@@ -2,27 +2,33 @@
 #define CENTRALLAYOUT_H
 
 #include <QGridLayout>
-#include <QPushButton>
+#include "button.h"
+#include "ui_mainwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class CentralLayout; }
 QT_END_NAMESPACE
 
-class CentralLayout
-{
+class CentralLayout {
 public:
     CentralLayout(int size, int count);
 
-    QGridLayout* getLayout();
+    QGridLayout *getLayout();
 
-protected:
-    void addButtons(QGridLayout* layout);
-
-    QPushButton* getButton(int size);
+    std::vector<std::vector<Button *>> getButtons();
 
 private:
     int size;
 
     int count;
+
+    QGridLayout *layout;
+
+    std::vector<std::vector<Button *>> buttons;
+
+    void addButtons();
+
+    void generateLayout();
 };
+
 #endif // CENTRALLAYOUT_H

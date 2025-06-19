@@ -1,25 +1,34 @@
 #include "centrallayout.h"
 #include "button.h"
 
-CentralLayout::CentralLayout(int size, int count)
-{
-    this->size = size;
-    this->count = count;
+CentralLayout::CentralLayout(int s, int c) {
+    size = s;
+    count = c;
+    generateLayout();
 }
 
-QGridLayout* CentralLayout::getLayout()
-{
-    QGridLayout *layout = new QGridLayout();
-    addButtons(layout);
+void CentralLayout::generateLayout() {
+    layout = new QGridLayout();
+    addButtons();
+}
+
+void CentralLayout::addButtons() {
+    buttons.clear();
+    for (int row = 0; row < count; row++) {
+        std::vector<Button *> entry;
+        for (int col = 0; col < count; col++) {
+            Button *button = new Button(size / count, row, col);
+            layout->addWidget(button->getPushButton(), row, col, Qt::AlignCenter);
+            entry.push_back(button);
+        }
+        buttons.push_back(entry);
+    }
+}
+
+QGridLayout *CentralLayout::getLayout() {
     return layout;
 }
 
-void CentralLayout::addButtons(QGridLayout* layout)
-{
-    for (int row = 0; row < count; row++) {
-        for (int col = 0; col < count; col++) {
-            Button *button = new Button(size/count);
-            layout->addWidget(button->getButton(), row, col, Qt::AlignCenter);
-        }
-    }
+std::vector<std::vector<Button *>> CentralLayout::getButtons() {
+    return buttons;
 }
