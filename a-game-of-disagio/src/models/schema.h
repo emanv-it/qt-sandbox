@@ -7,11 +7,18 @@ class Schema {
 public:
     Schema();
 
-    void init(int s, std::vector<std::vector<bool>> m);
+    explicit Schema(int s);
 
-    void init(int s);
+    Schema(int s, const std::vector<std::vector<bool>>& m);
 
-    int size;
+    void set(int s, const std::vector<std::vector<bool>>& m);
+
+    int getSize() const;
+
+    std::vector<std::vector<bool>> getMatrix();
+
+private:
+    int size = 0;
 
     std::vector<std::vector<bool>> matrix;
 };

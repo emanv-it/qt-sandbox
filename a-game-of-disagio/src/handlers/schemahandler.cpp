@@ -2,31 +2,29 @@
 #include "schemahandler.h"
 #include "../exceptions.h"
 
-SchemaHandler::SchemaHandler(int size) {
-    current.init(size);
-    initMap();
+SchemaHandler::SchemaHandler() : SchemaHandler(5) {
 }
 
-SchemaHandler::SchemaHandler() {
+SchemaHandler::SchemaHandler(int s) : current(s) {
     initMap();
 }
 
 void SchemaHandler::initMap() {
-    map['.'] = (std::vector<std::vector<bool>>) {{false, false, false, false, false},
-                                                 {false, false, false, false, false},
-                                                 {false, false, false, false, false},
-                                                 {false, false, false, false, false},
-                                                 {false, false, true,  false, false}};
-    map['D'] = (std::vector<std::vector<bool>>) {{true, true,  true,  false, false},
-                                                 {true, false, false, true,  false},
-                                                 {true, false, false, false, true},
-                                                 {true, false, false, false, true},
-                                                 {true, true,  true,  true,  false}};
-    map['i'] = (std::vector<std::vector<bool>>) {{false, false, true,  false, false},
-                                                 {false, false, false, false, false},
-                                                 {false, true,  true,  false, false},
-                                                 {false, false, true,  false, false},
-                                                 {false, true,  true,  true,  false}};
+    map['.'] = Schema(5, {{false, false, false, false, false},
+                          {false, false, false, false, false},
+                          {false, false, false, false, false},
+                          {false, false, false, false, false},
+                          {false, false, true,  false, false}});
+    map['D'] = Schema(5, {{true, true,  true,  false, false},
+                          {true, false, false, true,  false},
+                          {true, false, false, false, true},
+                          {true, false, false, false, true},
+                          {true, true,  true,  true,  false}});
+    map['i'] = Schema(5, {{false, false, true,  false, false},
+                          {false, false, false, false, false},
+                          {false, true,  true,  false, false},
+                          {false, false, true,  false, false},
+                          {false, true,  true,  true,  false}});
 }
 
 Schema SchemaHandler::get() {
@@ -34,56 +32,70 @@ Schema SchemaHandler::get() {
 }
 
 SchemaHandler *SchemaHandler::fromPattern(char pattern) {
-    std::vector<std::vector<bool>> matrix = map[pattern];
-    if (matrix.empty()) {
+    try {
+        resize(map[pattern]);
+    } catch (IncoherentSizeException &exception) {
         throw UnknownPatternException();
     }
-    set(matrix);
     return this;
 }
 
-void SchemaHandler::set(std::vector<std::vector<bool>> matrix) {
-    float factor = 5 / static_cast<float>(current.size);
-    current.matrix.clear();
-    for (int row = 0; row < current.size; row++) {
+SchemaHandler *SchemaHandler::set(Schema schema) {
+    current.set(schema.getSize(), schema.getMatrix());
+    return this;
+}
+
+SchemaHandler *SchemaHandler::resize(Schema schema) {
+    int oldSize = schema.getSize();
+    int newSize = current.getSize();
+    float factor = static_cast<float>(oldSize) / static_cast<float>(newSize);
+    std::vector<std::vector<bool>> newMatrix;
+    for (int row = 0; row < current.getSize(); row++) {
         std::vector<bool> entry;
-        int rowOrig = resizePosition(row, factor);
-        for (int col = 0; col < current.size; col++) {
-            int colOrig = resizePosition(col, factor);
-            entry.push_back(matrix[rowOrig][colOrig]);
+        int oldRow = resizePosition(row, factor);
+        for (int col = 0; col < current.getSize(); col++) {
+            int oldCol = resizePosition(col, factor);
+            entry.push_back(schema.getMatrix()[oldRow][oldCol]);
         }
-        current.matrix.push_back(entry);
+        newMatrix.push_back(entry);
     }
+    current.set(newSize, newMatrix);
+    return this;
 }
 
 int SchemaHandler::resizePosition(int position, float factor) {
     int origin = static_cast<int>(std::round(static_cast<float>(position + 1) * factor));
-    origin = (origin > current.size) ? current.size : origin;
+    int newSize = current.getSize();
+    origin = (origin > newSize) ? newSize : origin;
     return origin - 1;
 }
 
 SchemaHandler *SchemaHandler::change(int row, int col) {
-    if (row >= current.size || col >= current.size) {
+    int size = current.getSize();
+    if (row >= size || col >= size) {
         throw OutOfSchemaException();
     }
-    current.matrix.at(row).at(col) = !current.matrix.at(row).at(col);
+    std::vector<std::vector<bool>> matrix = current.getMatrix();
+    matrix.at(row).at(col) = !matrix.at(row).at(col);
     if (row > 0) {
-        current.matrix.at(row - 1).at(col) = !current.matrix.at(row - 1).at(col);
+        matrix.at(row - 1).at(col) = !matrix.at(row - 1).at(col);
     }
-    if (row < current.size - 1) {
-        current.matrix.at(row + 1).at(col) = !current.matrix.at(row + 1).at(col);
+    if (row < size - 1) {
+        matrix.at(row + 1).at(col) = !matrix.at(row + 1).at(col);
     }
     if (col > 0) {
-        current.matrix.at(row).at(col - 1) = !current.matrix.at(row).at(col - 1);
+        matrix.at(row).at(col - 1) = !matrix.at(row).at(col - 1);
     }
-    if (col < current.size - 1) {
-        current.matrix.at(row).at(col + 1) = !current.matrix.at(row).at(col + 1);
+    if (col < size - 1) {
+        matrix.at(row).at(col + 1) = !matrix.at(row).at(col + 1);
     }
+    Schema schema(size, matrix);
+    set(schema);
     return this;
 }
 
 bool SchemaHandler::isEmpty() {
-    for (std::vector<bool> entry: current.matrix) {
+    for (std::vector<bool> entry: current.getMatrix()) {
         for (bool value: entry) {
             if (value) {
                 return false;

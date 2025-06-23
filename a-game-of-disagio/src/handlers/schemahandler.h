@@ -8,9 +8,9 @@ class SchemaHandler {
 
 public:
 
-    SchemaHandler(int size);
-
     SchemaHandler();
+
+    explicit SchemaHandler(int size);
 
     Schema get();
 
@@ -18,16 +18,18 @@ public:
 
     SchemaHandler *change(int row, int col);
 
+    SchemaHandler *set(Schema schema);
+
+    SchemaHandler *resize(Schema schema);
+
     bool isEmpty();
 
 private:
     Schema current;
 
-    std::map<char, std::vector<std::vector<bool>>> map;
+    std::map<char, Schema> map;
 
     void initMap();
-
-    void set(std::vector<std::vector<bool>> schema);
 
     int resizePosition(int position, float factor);
 };

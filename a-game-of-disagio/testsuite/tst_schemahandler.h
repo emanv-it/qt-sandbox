@@ -27,4 +27,6 @@ private slots:
     void performClick();
 
     void checkEmptySchema();
+
+    void setDoubleDotSchema();
 };

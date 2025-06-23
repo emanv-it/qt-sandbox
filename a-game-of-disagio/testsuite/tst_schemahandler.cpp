@@ -10,11 +10,12 @@ void TestSchemaHandler::getEmptySchema() {
                                                {false, false, false, false, false},
                                                {false, false, false, false, false},
                                                {false, false, false, false, false}};
+    Schema schema = handler->get();
     QVERIFY(
-            handler->get().size == 5
+            schema.getSize() == 5
     );
     QVERIFY(
-            handler->get().matrix == expected
+            schema.getMatrix() == expected
     );
 }
 
@@ -25,11 +26,13 @@ void TestSchemaHandler::getDotSchema() {
                                                {false, false, false, false, false},
                                                {false, false, false, false, false},
                                                {false, false, true,  false, false}};
+    Schema schema = handler->get();
     QVERIFY(
-            handler->get().size == 5
+            schema.getSize() == 5
     );
+    schema = handler->fromPattern('.')->get();
     QVERIFY(
-            handler->fromPattern('.')->get().matrix == expected
+            schema.getMatrix() == expected
     );
 }
 
@@ -40,11 +43,13 @@ void TestSchemaHandler::getUpperCaseDSchema() {
                                                {true, false, false, false, true},
                                                {true, false, false, false, true},
                                                {true, true,  true,  true,  false}};
+    Schema schema = handler->get();
     QVERIFY(
-            handler->get().size == 5
+            schema.getSize() == 5
     );
+    schema = handler->fromPattern('D')->get();
     QVERIFY(
-            handler->fromPattern('D')->get().matrix == expected
+            schema.getMatrix() == expected
     );
 }
 
@@ -55,11 +60,13 @@ void TestSchemaHandler::getLowerCaseISchema() {
                                                {false, true,  true,  false, false},
                                                {false, false, true,  false, false},
                                                {false, true,  true,  true,  false}};
+    Schema schema = handler->get();
     QVERIFY(
-            handler->get().size == 5
+            schema.getSize() == 5
     );
+    schema = handler->fromPattern('i')->get();
     QVERIFY(
-            handler->fromPattern('i')->get().matrix == expected
+            schema.getMatrix() == expected
     );
 }
 
@@ -75,11 +82,13 @@ void TestSchemaHandler::getDoubleDotSchema() {
                                                {false, false, false, false, false, false, false, false, false, false},
                                                {false, false, false, false, true,  true,  false, false, false, false},
                                                {false, false, false, false, true,  true,  false, false, false, false}};
+    Schema schema = handler->get();
     QVERIFY(
-            handler->get().size == 10
+            schema.getSize() == 10
     );
+    schema = handler->fromPattern('.')->get();
     QVERIFY(
-            handler->fromPattern('.')->get().matrix == expected
+            schema.getMatrix() == expected
     );
 }
 
@@ -94,11 +103,13 @@ void TestSchemaHandler::getDoubleDSchema() {
                                                {true, true, false, false, false, false, false, false, true},
                                                {true, true, false, false, false, false, false, false, true},
                                                {true, true, true,  true,  true,  true,  true,  true,  false}};
+    Schema schema = handler->get();
     QVERIFY(
-            handler->get().size == 9
+            schema.getSize() == 9
     );
+    schema = handler->fromPattern('D')->get();
     QVERIFY(
-            handler->fromPattern('D')->get().matrix == expected
+            schema.getMatrix() == expected
     );
 }
 
@@ -109,34 +120,38 @@ void TestSchemaHandler::performClick() {
                                                {false, false, false, false, false},
                                                {false, false, false, false, false},
                                                {false, false, true,  false, false}};
+    Schema schema = handler->get();
     QVERIFY(
-            handler->get().size == 5
+            schema.getSize() == 5
     );
+    schema = handler->fromPattern('.')->get();
     QVERIFY(
-            handler->fromPattern('.')->get().matrix == expected
+            schema.getMatrix() == expected
     );
     expected = {{false, false, false, false, false},
                 {false, false, false, false, false},
                 {false, false, false, false, false},
                 {false, false, true,  false, false},
                 {false, true,  false, true,  false}};
+    schema = handler->change(4, 2)->get();
     QVERIFY(
-            handler->change(4, 2)->get().matrix == expected
+            schema.getMatrix() == expected
     );
     expected = {{false, false, false, false, false},
                 {false, false, false, false, false},
                 {false, false, true,  false, false},
                 {false, true,  false, true,  false},
                 {false, true,  true,  true,  false}};
+    schema = handler->change(3, 2)->get();
     QVERIFY(
-            handler->change(3, 2)->get().matrix == expected
+            schema.getMatrix() == expected
     );
 }
 
 void TestSchemaHandler::checkEmptySchema() {
     handler = new SchemaHandler();
     QVERIFY(
-            handler->get().size == 5
+            handler->get().getSize() == 5
     );
     QVERIFY(
             handler->isEmpty()
@@ -145,5 +160,39 @@ void TestSchemaHandler::checkEmptySchema() {
             !handler->change(0, 0)->isEmpty()
     );
 }
+
+void TestSchemaHandler::setDoubleDotSchema() {
+    handler = new SchemaHandler();
+    std::vector<std::vector<bool>> expected = {{false, false, false, false, false},
+                                               {false, false, false, false, false},
+                                               {false, false, false, false, false},
+                                               {false, false, false, false, false},
+                                               {false, false, false, false, false}};
+    Schema schema = handler->get();
+    QVERIFY(
+            schema.getSize() == 5
+    );
+    QVERIFY(
+            schema.getMatrix() == expected
+    );
+    Schema toSet(10, {{false, false, false, false, false, false, false, false, false, false},
+                      {false, false, false, false, false, false, false, false, false, false},
+                      {false, false, false, false, false, false, false, false, false, false},
+                      {false, false, false, false, false, false, false, false, false, false},
+                      {false, false, false, false, false, false, false, false, false, false},
+                      {false, false, false, false, false, false, false, false, false, false},
+                      {false, false, false, false, false, false, false, false, false, false},
+                      {false, false, false, false, false, false, false, false, false, false},
+                      {false, false, false, false, true,  true,  false, false, false, false},
+                      {false, false, false, false, true,  true,  false, false, false, false}});
+    schema = handler->set(toSet)->get();
+    QVERIFY(
+            schema.getSize() == toSet.getSize()
+    );
+    QVERIFY(
+            schema.getMatrix() == toSet.getMatrix()
+    );
+}
+
 
 QTEST_APPLESS_MAIN(TestSchemaHandler)
