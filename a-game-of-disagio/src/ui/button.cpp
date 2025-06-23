@@ -23,15 +23,15 @@ void Button::onClick() {
     std::vector<std::vector<Button *>> buttons = ((CentralLayout *) parentWidget()->layout())->getButtons();
     int max = static_cast<int>(buttons.size());
     if (row > 0) {
-        buttons.at(row - 1).at(col)->setChecked(!buttons.at(row - 1).at(col)->isChecked());
+        buttons[row - 1][col]->setChecked(!buttons[row - 1][col]->isChecked());
     }
     if (row < max - 1) {
-        buttons.at(row + 1).at(col)->setChecked(!buttons.at(row + 1).at(col)->isChecked());
+        buttons[row + 1][col]->setChecked(!buttons[row + 1][col]->isChecked());
     }
     if (col > 0) {
-        buttons.at(row).at(col - 1)->setChecked(!buttons.at(row).at(col - 1)->isChecked());
+        buttons[row][col - 1]->setChecked(!buttons[row][col - 1]->isChecked());
     }
     if (col < max - 1) {
-        buttons.at(row).at(col + 1)->setChecked(!buttons.at(row).at(col + 1)->isChecked());
+        buttons[row][col + 1]->setChecked(!buttons[row][col + 1]->isChecked());
     }
 }

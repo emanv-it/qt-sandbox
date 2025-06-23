@@ -11,7 +11,7 @@ void LevelHandler::setLevel(int level) {
     std::vector<std::vector<bool>> matrix = getSchema(size, level).getMatrix();
     for (int row = 0; row < size; row++) {
         for (int col = 0; col < size; col++) {
-            buttons.at(row).at(col)->setChecked(matrix[row][col]);
+            buttons[row][col]->setChecked(matrix[row][col]);
         }
     }
 }
