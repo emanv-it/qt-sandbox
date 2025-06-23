@@ -40,11 +40,6 @@ SchemaHandler *SchemaHandler::fromPattern(char pattern) {
     return this;
 }
 
-SchemaHandler *SchemaHandler::set(Schema schema) {
-    current.set(schema.getSize(), schema.getMatrix());
-    return this;
-}
-
 SchemaHandler *SchemaHandler::resize(Schema schema) {
     int oldSize = schema.getSize();
     int newSize = current.getSize();
@@ -68,39 +63,4 @@ int SchemaHandler::resizePosition(int position, float factor) {
     int newSize = current.getSize();
     origin = (origin > newSize) ? newSize : origin;
     return origin - 1;
-}
-
-SchemaHandler *SchemaHandler::change(int row, int col) {
-    int size = current.getSize();
-    if (row >= size || col >= size) {
-        throw OutOfSchemaException();
-    }
-    std::vector<std::vector<bool>> matrix = current.getMatrix();
-    matrix.at(row).at(col) = !matrix.at(row).at(col);
-    if (row > 0) {
-        matrix.at(row - 1).at(col) = !matrix.at(row - 1).at(col);
-    }
-    if (row < size - 1) {
-        matrix.at(row + 1).at(col) = !matrix.at(row + 1).at(col);
-    }
-    if (col > 0) {
-        matrix.at(row).at(col - 1) = !matrix.at(row).at(col - 1);
-    }
-    if (col < size - 1) {
-        matrix.at(row).at(col + 1) = !matrix.at(row).at(col + 1);
-    }
-    Schema schema(size, matrix);
-    set(schema);
-    return this;
-}
-
-bool SchemaHandler::isEmpty() {
-    for (std::vector<bool> entry: current.getMatrix()) {
-        for (bool value: entry) {
-            if (value) {
-                return false;
-            }
-        }
-    }
-    return true;
 }

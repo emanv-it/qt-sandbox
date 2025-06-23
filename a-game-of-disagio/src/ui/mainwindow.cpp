@@ -1,7 +1,7 @@
 #include "mainwindow.h"
-#include "button.h"
 #include "ui_mainwindow.h"
 #include "centrallayout.h"
+#include "src/handlers/levelhandler.h"
 
 #define SIZE (10)
 
@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     auto *layout = new CentralLayout(500, SIZE, ui->centralwidget);
     ui->centralwidget->setLayout(layout);
 
-    levelHandler = new LevelHandler(SIZE, ui->centralwidget);
+    auto *levelHandler = new LevelHandler(ui->centralwidget);
     levelHandler->setLevel(0);
 }
 

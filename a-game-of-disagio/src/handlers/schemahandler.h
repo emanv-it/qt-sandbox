@@ -16,13 +16,7 @@ public:
 
     SchemaHandler *fromPattern(char pattern);
 
-    SchemaHandler *change(int row, int col);
-
-    SchemaHandler *set(Schema schema);
-
     SchemaHandler *resize(Schema schema);
-
-    bool isEmpty();
 
 private:
     Schema current;

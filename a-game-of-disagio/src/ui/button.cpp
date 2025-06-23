@@ -1,24 +1,37 @@
 #include "button.h"
+#include "centrallayout.h"
 
 Button::Button(int s, int r, int c, QWidget *p) : QPushButton(p) {
     size = s;
-    name = getName(r, c);
-    p->setStyleSheet("QPushButton:checked { background-color: red; }");
+    row = r;
+    col = c;
+    init();
+}
+
+void Button::init() {
     generatePushButton();
     connect(this, &Button::clicked, this, &Button::onClick);
 }
 
 void Button::generatePushButton() {
-    setObjectName(name);
     setMinimumSize(size, size);
     setCheckable(true);
     show();
 }
 
-QString Button::getName(int row, int col) {
-    return QString::fromStdString("button_" + std::to_string(row) + "_" + std::to_string(col));
-}
-
 void Button::onClick() {
-
+    std::vector<std::vector<Button *>> buttons = ((CentralLayout *) parentWidget()->layout())->getButtons();
+    int max = static_cast<int>(buttons.size());
+    if (row > 0) {
+        buttons.at(row - 1).at(col)->setChecked(!buttons.at(row - 1).at(col)->isChecked());
+    }
+    if (row < max - 1) {
+        buttons.at(row + 1).at(col)->setChecked(!buttons.at(row + 1).at(col)->isChecked());
+    }
+    if (col > 0) {
+        buttons.at(row).at(col - 1)->setChecked(!buttons.at(row).at(col - 1)->isChecked());
+    }
+    if (col < max - 1) {
+        buttons.at(row).at(col + 1)->setChecked(!buttons.at(row).at(col + 1)->isChecked());
+    }
 }

@@ -14,12 +14,14 @@ Q_OBJECT
 public:
     Button(int s, int r, int c, QWidget *p);
 
-    static QString getName(int row, int col);
-
 private:
     int size;
 
-    QString name;
+    int row;
+
+    int col;
+
+    void init();
 
     void generatePushButton();
 

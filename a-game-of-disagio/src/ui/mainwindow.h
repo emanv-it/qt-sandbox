@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <vector>
-#include "../handlers/levelhandler.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,8 +19,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
-
-    LevelHandler *levelHandler;
 };
 
 #endif // MAINWINDOW_H

@@ -1,6 +1,7 @@
 #include "centrallayout.h"
 
 CentralLayout::CentralLayout(int s, int c, QWidget *p) : QGridLayout(p) {
+    parentWidget()->setStyleSheet("QPushButton:checked { background-color: red; }");
     size = s;
     count = c;
     addButtons();

@@ -9,19 +9,15 @@ class LevelHandler {
 
 public:
 
-    LevelHandler(int size, QWidget *p);
+    explicit LevelHandler(QWidget *p);
 
     void setLevel(int level);
 
 private:
 
-    int size;
-
     QWidget *parent;
 
-    Schema getSchema(int level);
-
-    std::vector<std::vector<Button *>> getButtons();
+    static Schema getSchema(int size, int level);
 };
 
 #endif //LEVELHANDLER_H
