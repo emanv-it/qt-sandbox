@@ -1,7 +1,7 @@
 #include "mainwindow.h"
-#include "centrallayout.h"
 #include "button.h"
 #include "ui_mainwindow.h"
+#include "centrallayout.h"
 
 #define SIZE (10)
 
@@ -16,14 +16,11 @@ MainWindow::MainWindow(QWidget *parent)
 //    menu->setTitle("Game" );
 //    ui->menubar->addMenu(menu);
 
-    CentralLayout *layout = new CentralLayout(500, SIZE);
-    ui->centralwidget->setLayout(layout->getLayout());
+    auto *layout = new CentralLayout(500, SIZE, ui->centralwidget);
+    ui->centralwidget->setLayout(layout);
 
-    for (std::vector<Button *> entry: layout->getButtons()) {
-        for (Button *button: entry) {
-            connect(button->getPushButton(), SIGNAL(clicked()), this, SLOT(Button::onClick(button)));
-        }
-    }
+    levelHandler = new LevelHandler(SIZE, ui->centralwidget);
+    levelHandler->setLevel(0);
 }
 
 MainWindow::~MainWindow() {

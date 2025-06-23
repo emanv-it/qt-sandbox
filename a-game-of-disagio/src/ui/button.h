@@ -7,26 +7,23 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class Button; }
 QT_END_NAMESPACE
 
-class Button {
-public:
-    Button(int s, int r, int c);
+class Button : public QPushButton {
 
-    QPushButton *getPushButton();
+Q_OBJECT
+
+public:
+    Button(int s, int r, int c, QWidget *p);
 
     static QString getName(int row, int col);
-
-public slots:
-
-    static void onClick(Button *button);
 
 private:
     int size;
 
     QString name;
 
-    QPushButton *button;
-
     void generatePushButton();
+
+    Q_SLOT void onClick();
 };
 
 #endif // BUTTON_H
