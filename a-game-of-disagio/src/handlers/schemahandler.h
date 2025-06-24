@@ -8,24 +8,15 @@ class SchemaHandler {
 
 public:
 
-    SchemaHandler();
-
-    explicit SchemaHandler(int size);
-
-    Schema get();
-
-    SchemaHandler *fromPattern(char pattern);
-
-    SchemaHandler *resize(Schema schema);
+    static Schema fromPattern(char pattern, int size);
 
 private:
-    Schema current;
 
-    std::map<char, Schema> map;
+    static Schema getMap(char pattern);
 
-    void initMap();
+    static Schema resize(Schema schema, int size);
 
-    int resizePosition(int position, float factor);
+    static int resizePosition(int position, int size, float factor);
 };
 
 #endif // SCHEMAHANDLER_H

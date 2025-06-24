@@ -19,8 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     auto *layout = new CentralLayout(500, SIZE, ui->centralwidget);
     ui->centralwidget->setLayout(layout);
 
-    auto *levelHandler = new LevelHandler(ui->centralwidget);
-    levelHandler->setLevel(0);
+    LevelHandler::setLevel(0, ui->centralwidget);
 }
 
 MainWindow::~MainWindow() {

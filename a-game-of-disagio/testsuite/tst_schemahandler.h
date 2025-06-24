@@ -1,14 +1,10 @@
 #include <QtTest>
-#include "../src/handlers/schemahandler.h"
 
 class TestSchemaHandler : public QObject {
 Q_OBJECT
 
 public:
     TestSchemaHandler();
-
-private:
-    SchemaHandler *handler;
 
 private slots:
 
@@ -23,10 +19,4 @@ private slots:
     void getDoubleDotSchema();
 
     void getDoubleDSchema();
-
-    void performClick();
-
-    void checkEmptySchema();
-
-    void setDoubleDotSchema();
 };
