@@ -16,8 +16,8 @@ add_executable(a-game-of-disagio src/main.cpp
         src/models/schema.cpp src/models/schema.h
         src/handlers/levelhandler.cpp src/handlers/levelhandler.h
         src/handlers/schemahandler.cpp src/handlers/schemahandler.h
-        src/ui/button.cpp src/ui/button.h
-        src/ui/centrallayout.cpp src/ui/centrallayout.h
+        src/ui/tilebutton.cpp src/ui/tilebutton.h
+        src/ui/schemalayout.cpp src/ui/schemalayout.h
         src/ui/mainwindow.cpp src/ui/mainwindow.h
         src/ui/mainwindow.ui
 )

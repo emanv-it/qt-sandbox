@@ -1,9 +1,9 @@
 #include "levelhandler.h"
 #include "schemahandler.h"
-#include "src/ui/centrallayout.h"
+#include "src/ui/schemalayout.h"
 
 void LevelHandler::setLevel(int level, QWidget *parent) {
-    std::vector<std::vector<Button *>> buttons = ((CentralLayout *) parent->layout())->getButtons();
+    std::vector<std::vector<QPushButton *>> buttons = ((SchemaLayout *) parent->layout())->getButtons();
     int size = static_cast<int>(buttons.size());
     std::vector<std::vector<bool>> matrix = LevelHandler::getSchemaFromLevel(size, level).getMatrix();
     for (int row = 0; row < size; row++) {
