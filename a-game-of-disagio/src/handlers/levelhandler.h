@@ -2,17 +2,17 @@
 #define LEVELHANDLER_H
 
 #include <QWidget>
-#include "src/models/schema.h"
+#include "../models/schema.h"
 
 class LevelHandler {
 
 public:
 
-    static void setLevel(int level, QWidget *p);
+    static void setLevel(int nOfTiles, int level, QWidget *parent);
 
 private:
 
-    static Schema getSchemaFromLevel(int size, int level);
+    static Schema getSchemaFromLevel(int nOfTiles, int level);
 };
 
 #endif //LEVELHANDLER_H

@@ -5,7 +5,7 @@ TestSchemaHandler::TestSchemaHandler() {
 }
 
 void TestSchemaHandler::getEmptySchema() {
-    std::vector<std::vector<bool>> expected = {{false, false, false, false, false},
+    QVector<QVector<bool>> expected = {{false, false, false, false, false},
                                                {false, false, false, false, false},
                                                {false, false, false, false, false},
                                                {false, false, false, false, false},
@@ -20,7 +20,7 @@ void TestSchemaHandler::getEmptySchema() {
 }
 
 void TestSchemaHandler::getDotSchema() {
-    std::vector<std::vector<bool>> expected = {{false, false, false, false, false},
+    QVector<QVector<bool>> expected = {{false, false, false, false, false},
                                                {false, false, false, false, false},
                                                {false, false, false, false, false},
                                                {false, false, false, false, false},
@@ -35,7 +35,7 @@ void TestSchemaHandler::getDotSchema() {
 }
 
 void TestSchemaHandler::getUpperCaseDSchema() {
-    std::vector<std::vector<bool>> expected = {{true, true,  true,  false, false},
+    QVector<QVector<bool>> expected = {{true, true,  true,  false, false},
                                                {true, false, false, true,  false},
                                                {true, false, false, false, true},
                                                {true, false, false, false, true},
@@ -50,7 +50,7 @@ void TestSchemaHandler::getUpperCaseDSchema() {
 }
 
 void TestSchemaHandler::getLowerCaseISchema() {
-    std::vector<std::vector<bool>> expected = {{false, false, true,  false, false},
+    QVector<QVector<bool>> expected = {{false, false, true,  false, false},
                                                {false, false, false, false, false},
                                                {false, true,  true,  false, false},
                                                {false, false, true,  false, false},
@@ -65,7 +65,7 @@ void TestSchemaHandler::getLowerCaseISchema() {
 }
 
 void TestSchemaHandler::getDoubleDotSchema() {
-    std::vector<std::vector<bool>> expected = {{false, false, false, false, false, false, false, false, false, false},
+    QVector<QVector<bool>> expected = {{false, false, false, false, false, false, false, false, false, false},
                                                {false, false, false, false, false, false, false, false, false, false},
                                                {false, false, false, false, false, false, false, false, false, false},
                                                {false, false, false, false, false, false, false, false, false, false},
@@ -85,7 +85,7 @@ void TestSchemaHandler::getDoubleDotSchema() {
 }
 
 void TestSchemaHandler::getDoubleDSchema() {
-    std::vector<std::vector<bool>> expected = {{true, true, true,  true,  true,  true,  false, false, false},
+    QVector<QVector<bool>> expected = {{true, true, true,  true,  true,  true,  false, false, false},
                                                {true, true, true,  true,  true,  true,  false, false, false},
                                                {true, true, false, false, false, false, true,  true,  false},
                                                {true, true, false, false, false, false, true,  true,  false},

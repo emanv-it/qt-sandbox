@@ -1,36 +1,15 @@
 #include "schemalayout.h"
 
-SchemaLayout::SchemaLayout(int s, int c, QWidget *p) : QGridLayout(p) {
+SchemaLayout::SchemaLayout(int nOfTiles, int size, QWidget *parent) : QGridLayout(parent) {
     parentWidget()->setStyleSheet("QPushButton:checked { background-color: red; }");
-    size = s;
-    count = c;
-    addButtons();
+    addButtons(nOfTiles, size);
 }
 
-void SchemaLayout::addButtons() {
-    clearButtons();
-    buttons.resize(count);
-    for (int row = 0; row < count; row++) {
-        buttons[row].resize(count);
-        for (int col = 0; col < count; col++) {
-            buttons[row][col] = new TileButton(size / count, row, col, parentWidget());
-            addWidget(buttons[row][col], row, col, Qt::AlignCenter);
+void SchemaLayout::addButtons(int nOfTiles, int size) {
+    for (int row = 0; row < nOfTiles; row++) {
+        for (int col = 0; col < nOfTiles; col++) {
+            QPushButton *button = new TileButton(size / nOfTiles, row, col, parentWidget());
+            addWidget(button, row, col, Qt::AlignCenter);
         }
     }
-}
-
-void SchemaLayout::clearButtons() {
-    if (!buttons.empty()) {
-        for (auto &entry: buttons) {
-            for (auto &button: entry) {
-                free(button);
-            }
-            entry.clear();
-        }
-        buttons.clear();
-    }
-}
-
-std::vector<std::vector<QPushButton *>> SchemaLayout::getButtons() {
-    return buttons;
 }

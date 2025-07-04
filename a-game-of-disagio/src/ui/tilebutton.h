@@ -8,14 +8,11 @@ class TileButton : public QPushButton {
 Q_OBJECT
 
 public:
-    TileButton(int s, int r, int c, QWidget *p);
+    TileButton(int size, int row, int col, QWidget *p);
 
 private:
-    int row;
 
-    int col;
-
-    void generatePushButton(int size);
+    void generatePushButton(int size, int row, int col);
 
     Q_SLOT void onClick();
 };

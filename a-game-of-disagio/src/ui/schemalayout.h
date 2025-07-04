@@ -10,20 +10,11 @@ class SchemaLayout : public QGridLayout {
 Q_OBJECT
 
 public:
-    SchemaLayout(int s, int c, QWidget *p);
-
-    std::vector<std::vector<QPushButton *>> getButtons();
+    SchemaLayout(int nOfTiles, int size, QWidget *parent);
 
 private:
-    int size;
 
-    int count;
-
-    std::vector<std::vector<QPushButton *>> buttons;
-
-    void addButtons();
-
-    void clearButtons();
+    void addButtons(int nOfTiles, int size);
 };
 
 #endif // SCHEMALAYOUT_H

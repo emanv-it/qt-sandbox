@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "schemalayout.h"
-#include "src/handlers/levelhandler.h"
+#include "../handlers/levelhandler.h"
 
-#define SIZE (10)
+#define N_OF_TILES (10)
 
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -16,10 +16,10 @@ MainWindow::MainWindow(QWidget *parent)
 //    menu->setTitle("Game" );
 //    ui->menubar->addMenu(menu);
 
-    auto *layout = new SchemaLayout(500, SIZE, ui->centralwidget);
+    auto *layout = new SchemaLayout(N_OF_TILES, 500, ui->centralwidget);
     ui->centralwidget->setLayout(layout);
 
-    LevelHandler::setLevel(0, ui->centralwidget);
+    LevelHandler::setLevel(N_OF_TILES, 0, ui->centralwidget);
 }
 
 MainWindow::~MainWindow() {

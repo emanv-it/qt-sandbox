@@ -1,19 +1,21 @@
 #include "levelhandler.h"
 #include "schemahandler.h"
-#include "src/ui/schemalayout.h"
+#include "tilehandler.h"
 
-void LevelHandler::setLevel(int level, QWidget *parent) {
-    std::vector<std::vector<QPushButton *>> buttons = ((SchemaLayout *) parent->layout())->getButtons();
-    int size = static_cast<int>(buttons.size());
-    std::vector<std::vector<bool>> matrix = LevelHandler::getSchemaFromLevel(size, level).getMatrix();
-    for (int row = 0; row < size; row++) {
-        for (int col = 0; col < size; col++) {
-            buttons[row][col]->setChecked(matrix[row][col]);
+void LevelHandler::setLevel(int nOfTiles, int level, QWidget *parent) {
+    QVector<QVector<bool>> matrix = LevelHandler::getSchemaFromLevel(nOfTiles, level).getMatrix();
+    for (int row = 0; row < nOfTiles; row++) {
+        for (int col = 0; col < nOfTiles; col++) {
+            auto *button = parent->findChild<QPushButton *>(TileHandler::getName(row, col));
+            if (button) {
+                button->setChecked(matrix[row][col]);
+            }
         }
     }
+
 }
 
-Schema LevelHandler::getSchemaFromLevel(int size, int level) {
-    std::vector<char> pattern = {'D', 'i', 's', 'a', 'g', 'i', 'o', '.'};
-    return SchemaHandler::fromPattern(pattern[level], size);
+Schema LevelHandler::getSchemaFromLevel(int nOfTiles, int level) {
+    QList<char> pattern = {'D', 'i', 's', 'a', 'g', 'i', 'o', '.'};
+    return SchemaHandler::fromPattern(pattern[level], nOfTiles);
 }

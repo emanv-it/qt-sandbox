@@ -5,28 +5,25 @@ Schema::Schema() : Schema(5) {
 }
 
 Schema::Schema(int s) {
-    std::vector<std::vector<bool>> m;
+    QVector<QVector<bool>> m;
+    m.resize(s);
     for (int row = 0; row < s; row++) {
-        std::vector<bool> r;
-        for (int col = 0; col < s; col++) {
-            r.push_back(false);
-        }
-        m.push_back(r);
+        m[row].resize(s);
     }
     set(s, m);
 }
 
-Schema::Schema(int s, const std::vector<std::vector<bool>> &m) {
+Schema::Schema(int s, const QVector<QVector<bool>> &m) {
     set(s, m);
 }
 
-void Schema::set(int s, const std::vector<std::vector<bool>> &m) {
+void Schema::set(int s, const QVector<QVector<bool>> &m) {
     if (m.size() != s) {
         throw IncoherentSizeException();
     }
     size = s;
     matrix.clear();
-    for (const std::vector<bool> &entry: m) {
+    for (const QVector<bool> &entry: m) {
         if (entry.size() != size) {
             throw IncoherentSizeException();
         }
@@ -38,6 +35,6 @@ int Schema::getSize() const {
     return size;
 }
 
-std::vector<std::vector<bool>> Schema::getMatrix() {
+QVector<QVector<bool>> Schema::getMatrix() {
     return matrix;
 }

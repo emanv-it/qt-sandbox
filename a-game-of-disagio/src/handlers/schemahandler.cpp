@@ -2,8 +2,8 @@
 #include "schemahandler.h"
 #include "../exceptions.h"
 
-Schema SchemaHandler::fromPattern(char pattern, int size) {
-    return resize(getMap(pattern), size);
+Schema SchemaHandler::fromPattern(char pattern, int nOfTiles) {
+    return resize(getMap(pattern), nOfTiles);
 }
 
 Schema SchemaHandler::getMap(char pattern) {
@@ -31,30 +31,30 @@ Schema SchemaHandler::getMap(char pattern) {
     }
 }
 
-Schema SchemaHandler::resize(Schema schema, int size) {
-    Schema toReturn(size);
+Schema SchemaHandler::resize(Schema schema, int nOfTiles) {
+    Schema toReturn(nOfTiles);
     int oldSize = schema.getSize();
-    float factor = static_cast<float>(oldSize) / static_cast<float>(size);
-    std::vector<std::vector<bool>> newMatrix;
-    for (int row = 0; row < size; row++) {
-        std::vector<bool> entry;
-        int oldRow = resizePosition(row, size, factor);
-        for (int col = 0; col < size; col++) {
-            int oldCol = resizePosition(col, size, factor);
-            entry.push_back(schema.getMatrix()[oldRow][oldCol]);
+    float factor = static_cast<float>(oldSize) / static_cast<float>(nOfTiles);
+    QVector<QVector<bool>> newMatrix;
+    newMatrix.resize(nOfTiles);
+    for (int row = 0; row < nOfTiles; row++) {
+        newMatrix[row].resize(nOfTiles);
+        int oldRow = resizePosition(row, nOfTiles, factor);
+        for (int col = 0; col < nOfTiles; col++) {
+            int oldCol = resizePosition(col, nOfTiles, factor);
+            newMatrix[row][col] = schema.getMatrix()[oldRow][oldCol];
         }
-        newMatrix.push_back(entry);
     }
     try {
-        toReturn.set(size, newMatrix);
+        toReturn.set(nOfTiles, newMatrix);
     } catch (IncoherentSizeException &exception) {
         throw UnknownPatternException();
     }
     return toReturn;
 }
 
-int SchemaHandler::resizePosition(int position, int size, float factor) {
+int SchemaHandler::resizePosition(int position, int nOfTiles, float factor) {
     int origin = static_cast<int>(std::round(static_cast<float>(position + 1) * factor));
-    origin = (origin > size) ? size : origin;
+    origin = (origin > nOfTiles) ? nOfTiles : origin;
     return origin - 1;
 }
