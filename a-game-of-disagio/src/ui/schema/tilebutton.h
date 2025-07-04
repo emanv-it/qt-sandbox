@@ -2,17 +2,20 @@
 #define TILEBUTTON_H
 
 #include <QPushButton>
+#include <QSize>
 
 class TileButton : public QPushButton {
 
 Q_OBJECT
 
 public:
-    TileButton(int size, int row, int col, QWidget *p);
+    TileButton(int side, int row, int col, QWidget *p);
+
+    void resizeHandler(int side);
 
 private:
 
-    void generatePushButton(int size, int row, int col);
+    void generatePushButton(const QString &name, int side);
 
     Q_SLOT void onClick();
 };

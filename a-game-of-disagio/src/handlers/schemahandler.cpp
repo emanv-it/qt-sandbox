@@ -56,5 +56,5 @@ Schema SchemaHandler::resize(Schema schema, int nOfTiles) {
 int SchemaHandler::resizePosition(int position, int nOfTiles, float factor) {
     int origin = static_cast<int>(std::round(static_cast<float>(position + 1) * factor));
     origin = (origin > nOfTiles) ? nOfTiles : origin;
-    return origin - 1;
+    return (origin > 0) ? origin - 1 : 0;
 }

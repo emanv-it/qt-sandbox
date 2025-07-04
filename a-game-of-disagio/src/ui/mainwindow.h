@@ -17,6 +17,8 @@ public:
 
     ~MainWindow() override;
 
+    void resizeEvent(QResizeEvent *event) override;
+
 private:
     Ui::MainWindow *ui;
 };

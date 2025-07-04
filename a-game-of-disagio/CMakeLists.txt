@@ -16,10 +16,13 @@ add_executable(a-game-of-disagio src/main.cpp
         src/handlers/schemahandler.cpp src/handlers/schemahandler.h
         src/handlers/tilehandler.cpp src/handlers/tilehandler.h
         src/models/schema.cpp src/models/schema.h
+        src/ui/schema/schemalayout.cpp src/ui/schema/schemalayout.h
+        src/ui/schema/schemawidget.cpp src/ui/schema/schemawidget.h
+        src/ui/schema/tilebutton.cpp src/ui/schema/tilebutton.h
+        src/ui/side/sidewidget.cpp src/ui/side/sidewidget.h
         src/ui/mainwindow.cpp src/ui/mainwindow.h
         src/ui/mainwindow.ui
-        src/ui/schemalayout.cpp src/ui/schemalayout.h
-        src/ui/tilebutton.cpp src/ui/tilebutton.h
+        src/ui/windowlayout.cpp src/ui/windowlayout.h
         src/exceptions.h
 )
 target_link_libraries(a-game-of-disagio Qt5::Widgets)

@@ -2,19 +2,23 @@
 #define SCHEMALAYOUT_H
 
 #include <QGridLayout>
+#include <QList>
 #include "tilebutton.h"
-#include "ui_mainwindow.h"
 
 class SchemaLayout : public QGridLayout {
 
 Q_OBJECT
 
 public:
-    SchemaLayout(int nOfTiles, int size, QWidget *parent);
+    SchemaLayout(int nOfTiles, int side, QWidget *parent);
+
+    void resizeHandler(int side);
 
 private:
 
-    void addButtons(int nOfTiles, int size);
+    QList<TileButton *> buttons;
+
+    void addButtons(int nOfTiles, int side);
 };
 
 #endif // SCHEMALAYOUT_H
